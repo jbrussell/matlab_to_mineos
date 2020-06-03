@@ -1,0 +1,3 @@
+[submodule "MINEOS"]
+	path = MINEOS
+	url = https://github.com/jbrussell/MINEOS.git
