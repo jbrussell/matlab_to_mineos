@@ -73,7 +73,8 @@ system(['chmod u+x ' execfile_k]);
 if ifverbose
     fprintf('    > Calculting kernels from MINEOS output \n    > Will take some time...')
 end
-[status,cmdout] = system(['/usr/local/bin/gtimeout 100 ./',execfile_k]);
+% [status,cmdout] = system(['/usr/local/bin/gtimeout 100 ./',execfile_k]);
+[status,cmdout] = system(['gtimeout 100 ./',execfile_k]);
 if ifverbose
     fprintf(' success!\n');
 end

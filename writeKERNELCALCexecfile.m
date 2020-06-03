@@ -41,16 +41,17 @@ maxf = 1000./min(swperiods) + 0.1; % in mHz
 fid = fopen(execfile,'w');
 fprintf(fid,'#!/bin/csh\n');
 %
-fprintf(fid,'#\n');
-fprintf(fid,'set xdir=/Users/zeilon/Work/codes/CADMINEOS/bin\n');
-fprintf(fid,'#\n');
+% fprintf(fid,'#\n');
+% fprintf(fid,'set xdir=/Users/zeilon/Work/codes/CADMINEOS/bin\n');
+% fprintf(fid,'#\n');
 %% =======================================================================
 fprintf(fid,'echo "=================================================" > %s\n',logfile);
 fprintf(fid,'echo "Stripping mineos" >> %s\n',logfile);
 %
 fprintf(fid,'#\n');
 %
-fprintf(fid,'$xdir/mineos_strip <<! >> %s\n',logfile);
+% fprintf(fid,'$xdir/mineos_strip <<! >> %s\n',logfile);
+fprintf(fid,'mineos_strip <<! >> %s\n',logfile);
 fprintf(fid,'%s\n',stripfile);
 for ief = 1:length(eigfiles)
     fprintf(fid,'%s\n',eigfiles{ief});
@@ -65,7 +66,8 @@ fprintf(fid,'echo "Done stripping, now calculating tables" >> %s\n',logfile);
 %
 fprintf(fid,'#\n');
 %
-fprintf(fid,'$xdir/mineos_table <<! >> %s\n',logfile);
+% fprintf(fid,'$xdir/mineos_table <<! >> %s\n',logfile);
+fprintf(fid,'mineos_table <<! >> %s\n',logfile);
 fprintf(fid,'%s\n',tabfile);
 fprintf(fid,'40000\n');
 fprintf(fid,'0 %.1f\n',maxf);
@@ -86,7 +88,8 @@ fprintf(fid,'# second line says stop searching (or could add more parameters to 
 fprintf(fid,'# 3rd line gives frequency range to search in (mHz)\n');
 fprintf(fid,'#\n');
 %
-fprintf(fid,'$xdir/plot_wk <<! >> %s\n',logfile);
+% fprintf(fid,'$xdir/plot_wk <<! >> %s\n',logfile);
+fprintf(fid,'plot_wk <<! >> %s\n',logfile);
 fprintf(fid,'table %s_hdr\n',tabfile);
 fprintf(fid,'search\n');
 fprintf(fid,'1 0.0 %.2f\n',maxf);
@@ -105,7 +108,8 @@ fprintf(fid,'echo "Making frechet phV kernels binary" >> %s\n',logfile);
 fprintf(fid,'#\n');
 %
 fprintf(fid,'rm %s\n',ckernelfile);
-fprintf(fid,'$xdir/frechet_cv <<! >> %s\n',logfile);
+% fprintf(fid,'$xdir/frechet_cv <<! >> %s\n',logfile);
+fprintf(fid,'frechet_cv <<! >> %s\n',logfile);
 fprintf(fid,'%s\n',qmod);
 fprintf(fid,'%s_hdr.branch\n',tabfile);
 fprintf(fid,'%s\n',ckernelfile);
@@ -129,7 +133,8 @@ fprintf(fid,'echo "Making frechet file in prep for grV kernels" >> %s\n',logfile
 fprintf(fid,'#\n');
 %
 fprintf(fid,'rm %s\n',kernelfile);
-fprintf(fid,'$xdir/frechet <<! >> %s\n',logfile);
+% fprintf(fid,'$xdir/frechet <<! >> %s\n',logfile);
+fprintf(fid,'frechet <<! >> %s\n',logfile);
 fprintf(fid,'%s\n',qmod);
 fprintf(fid,'%s_hdr.branch\n',tabfile);
 fprintf(fid,'%s\n',kernelfile);
@@ -149,7 +154,8 @@ fprintf(fid,'echo "Making frechet grV kernels binary" >> %s\n',logfile);
 fprintf(fid,'#\n');
 %
 fprintf(fid,'rm %s\n',gkernelfile);
-fprintf(fid,'$xdir/frechet_gv <<! >> %s\n',logfile);
+% fprintf(fid,'$xdir/frechet_gv <<! >> %s\n',logfile);
+fprintf(fid,'frechet_gv <<! >> %s\n',logfile);
 fprintf(fid,'%s\n',kernelfile);
 fprintf(fid,'0\n');
 fprintf(fid,'%s\n',gkernelfile);
@@ -168,7 +174,8 @@ if ph_gr(1) % only if ph_gr instructs
     %
     fprintf(fid,'#\n');
     %
-    fprintf(fid,'$xdir/draw_frechet_gv <<!\n');
+%     fprintf(fid,'$xdir/draw_frechet_gv <<!\n');
+    fprintf(fid,'draw_frechet_gv <<!\n');
     fprintf(fid,'%s\n',ckernelfile);
     fprintf(fid,'%s\n',ickernelfile);
     fprintf(fid,'%.2f\n',swperiods(ip));
@@ -188,7 +195,8 @@ if ph_gr(2) % only if ph_gr instructs
     %
     fprintf(fid,'#\n');
     %
-    fprintf(fid,'$xdir/draw_frechet_gv <<!\n');
+%     fprintf(fid,'$xdir/draw_frechet_gv <<!\n');
+    fprintf(fid,'draw_frechet_gv <<!\n');
     fprintf(fid,'%s\n',gkernelfile);
     fprintf(fid,'%s\n',igkernelfile);
     fprintf(fid,'%.0f\n',round(swperiods(ip)));

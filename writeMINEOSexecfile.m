@@ -27,8 +27,9 @@ fprintf(fid,'echo "Calculating eigenfunctions with MINEOS"\n');
 %
 fprintf(fid,'#\n');
 %
-fprintf(fid,'set xdir=/Users/zeilon/Work/codes/CADMINEOS/bin\n');
-fprintf(fid,'$xdir/mineos_nohang << ! > %s\n',logfile);
+% fprintf(fid,'set xdir=/Users/zeilon/Work/codes/CADMINEOS/bin\n');
+% fprintf(fid,'$xdir/mineos_nohang << ! > %s\n',logfile);
+fprintf(fid,'mineos_nohang << ! > %s\n',logfile);
 fprintf(fid,'%s\n',cardfile);
 fprintf(fid,'%s\n',ascfile);
 fprintf(fid,'%s\n',eigfile);

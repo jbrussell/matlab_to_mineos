@@ -33,8 +33,9 @@ fprintf(fid,'echo "Q-correcting velocities"\n');
 %
 fprintf(fid,'#\n');
 %
-fprintf(fid,'set xdir=/Users/zeilon/Work/codes/CADMINEOS/bin\n');
-fprintf(fid,'$xdir/mineos_q << ! >> %s\n',logfile);
+% fprintf(fid,'set xdir=/Users/zeilon/Work/codes/CADMINEOS/bin\n');
+% fprintf(fid,'$xdir/mineos_q << ! >> %s\n',logfile);
+fprintf(fid,'mineos_q << ! >> %s\n',logfile);
 fprintf(fid,'%s\n',qmod);
 fprintf(fid,'%s\n',qfile);
 for ief = 1:length(eigfiles)

@@ -35,7 +35,7 @@ parm = struct('R_or_L','R',...
               'fmax',200.05,...       % max frequency (mHz) - gets reset by min period
               'l_increment_standard',2,... %
               'l_increment_failed',5,...
-              'qmodpath','/Users/zeilon/Documents/MATLAB/matlab_to_mineos/safekeeping/qmod');
+              'qmodpath','../safekeeping/qmod');
 % replace default values with user values, where appropriate.
 fns = fieldnames(par_mineos);
 for ii = 1:length(fns)
@@ -67,7 +67,8 @@ qfile = [ID,'.q'];
 kernelfile = [ID,'.frechet'];
 
 % standard inputs, don't get re-written
-qmod= '/Users/zeilon/Documents/MATLAB/matlab_to_mineos/safekeeping/qmod';
+% qmod= '/Users/zeilon/Documents/MATLAB/matlab_to_mineos/safekeeping/qmod';
+qmod= parm.qmodpath;
 
 %% =======================================================================
 wd = pwd;
@@ -85,7 +86,8 @@ if ifverbose
     fprintf('    > Calculting kernels from MINEOS output \n    > Will take some time...')
 end
 %tic
-[status,cmdout] = system(['/opt/local/bin/gtimeout 100 ./',execfile_k]);
+% [status,cmdout] = system(['/opt/local/bin/gtimeout 100 ./',execfile_k]);
+[status,cmdout] = system(['gtimeout 100 ./',execfile_k]);
 %fprintf('Kernel computation itself %s%s took %.5f s\n',ID,parm.R_or_L(1),toc)
 if ifverbose
     fprintf(' success!\n');

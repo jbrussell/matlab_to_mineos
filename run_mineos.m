@@ -32,7 +32,7 @@ parm = struct('R_or_L','R',...
               'l_increment_standard',2,... %
               'l_increment_failed',5,...
               'maxrunN',5e2,...
-              'qmodpath','/Users/zeilon/Documents/MATLAB/matlab_to_mineos/safekeeping/qmod');
+              'qmodpath','../safekeeping/qmod');
 % replace default values with user values, where appropriate.
 if ~isempty(par_mineos)
     fns = fieldnames(par_mineos);
@@ -110,7 +110,8 @@ writeMINEOSmodefile( modefile, modetype,parm.lmin,parm.lmax,parm.fmin,parm.fmax 
 writeMINEOSexecfile( execfile,cardfile,modefile,eigfile,ascfile,[ID,'.log']);
 
 system(['chmod u+x ' execfile]); % change execfile permissions
-[status,cmdout] = system(['/opt/local/bin/gtimeout 100 ./',execfile]); % run execfile
+% [status,cmdout] = system(['/opt/local/bin/gtimeout 100 ./',execfile]); % run execfile
+[status,cmdout] = system(['gtimeout 100 ./',execfile]); % run execfile
 
 delete(execfile,modefile); % kill files we don't need
 
@@ -148,7 +149,8 @@ while Tmin > min(swperiods)
     writeMINEOSexecfile( execfile,cardfile,modefile,eigfile,ascfile,[ID,'.log']);
 
     system(['chmod u+x ' execfile]); % change execfile permissions
-    [status,cmdout] = system(['/opt/local/bin/gtimeout 100 ./',execfile]); % run execfile
+%     [status,cmdout] = system(['/opt/local/bin/gtimeout 100 ./',execfile]); % run execfile
+    [status,cmdout] = system(['gtimeout 100 ./',execfile]); % run execfile
 
     delete(execfile,modefile); % kill files we don't need
 
@@ -187,8 +189,8 @@ for ief = 1:length(eigfiles)-1
     writeMINEOSeig_recover( execfile,eigfiles{ief},llasts(ief) )
 
     system(['chmod u+x ' execfile]); % change execfile permissions
-    [status,cmdout] = system(['/opt/local/bin/gtimeout 100 ./',execfile]); % run execfile
-
+%     [status,cmdout] = system(['/opt/local/bin/gtimeout 100 ./',execfile]); % run execfile
+    [status,cmdout] = system(['gtimeout 100 ./',execfile]); % run execfile
     eigfiles_fix{ief} = [eigfiles{ief},'_fix'];
     delete(execfile);
 end
@@ -198,7 +200,8 @@ qexecfile = [ID,'.run_mineosq'];
 writeMINEOS_Qexecfile( qexecfile,eigfiles_fix,qmod,[ID,'.q'],[ID,'.log'] )
 
 system(['chmod u+x ' qexecfile]); % change qexecfile permissions
-[status,cmdout] = system(['/opt/local/bin/gtimeout 100 ./',qexecfile]); % run qexecfile
+% [status,cmdout] = system(['/opt/local/bin/gtimeout 100 ./',qexecfile]); % run qexecfile
+[status,cmdout] = system(['gtimeout 100 ./',qexecfile]); % run qexecfile
 
 delete(qexecfile);
 
