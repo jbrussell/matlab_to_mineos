@@ -3,3 +3,4 @@ test*
 safekeeping/*
 *.pdf
 defunct/*
+.DS_Store
