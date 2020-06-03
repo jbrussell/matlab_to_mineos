@@ -18,7 +18,8 @@ clear all
 % 4. Probably others I've not thought of - if/when this fails, please let
 % me know why (even if it's easy for you to fix). 
 
-addpath('~/Documents/MATLAB/matlab_to_mineos');
+addpath('../functions/')
+set_binpath
 
 %% Define the periods to compute, log-spaced between 8s and 140s
 swperiods = round(logspace(log10(8),log10(140),10));
